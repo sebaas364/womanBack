@@ -63,10 +63,10 @@ public class UsuarioController {
 	}
 
 	@PutMapping("/update/{idUsuario}")
-	public ResponseEntity<String> update(@PathVariable int id, @RequestBody UsuarioDTO dto) {
+	public ResponseEntity<String> update( @RequestBody UsuarioDTO dto) {
 		
 		ResponseEntity<String> response;
-		switch (usuarioServ.update(id, dto)) {
+		switch (usuarioServ.update(dto.getIdUsuario(), dto)) {
 		case 0:
 			response = ResponseEntity.ok("Usuario actualizado correctamente");
 			break;
