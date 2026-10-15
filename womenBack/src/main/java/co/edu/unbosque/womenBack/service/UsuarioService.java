@@ -30,8 +30,13 @@ public class UsuarioService {
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 
-	
 	public int create(UsuarioDTO dto) {
+		if (dto == null || dto.getDocumento() == null || dto.getDocumento().isBlank() || dto.getNombres() == null
+				|| dto.getNombres().isBlank() || dto.getApellidos() == null || dto.getApellidos().isBlank()
+				|| dto.getCorreo() == null || dto.getCorreo().isBlank() || dto.getIdRol() == null
+				|| dto.getContrasenia() == null || dto.getContrasenia().isBlank()) {
+			return 5;
+		}
 		if (usuarioRepo.existsByDocumento(dto.getDocumento())) {
 			return 2;
 		}
@@ -48,10 +53,13 @@ public class UsuarioService {
 		entity.setRol(rol.get());
 		entity.setContrasenaHash(passwordEncoder.encode(dto.getContrasenia()));
 		entity.setIntentosFallidos(0);
+		
+		if (entity.getEstado() == null || entity.getEstado().isBlank()) {
+			entity.setEstado("ACTIVO");
+		}
 		usuarioRepo.save(entity);
 		return 0;
 	}
-
 
 	public List<UsuarioDTO> getAll() {
 		List<UsuarioDTO> dtoList = new ArrayList<>();
@@ -72,6 +80,10 @@ public class UsuarioService {
 			return 1;
 		}
 
+		if (dto == null || dto.getDocumento() == null || dto.getDocumento().isBlank() || dto.getNombres() == null || dto.getNombres().isBlank()
+				|| dto.getApellidos() == null || dto.getApellidos().isBlank() || dto.getCorreo() == null || dto.getCorreo().isBlank() || dto.getIdRol() == null) {
+			return 5;
+		}
 		if (usuarioRepo.existsByDocumentoAndIdUsuarioNot(dto.getDocumento(), idUsuario)) {
 			return 2;
 		}
@@ -94,6 +106,9 @@ public class UsuarioService {
 		if (dto.getContrasenia() != null && !dto.getContrasenia().isBlank()) {
 			usuario.setContrasenaHash(passwordEncoder.encode(dto.getContrasenia()));
 		}
+		if (dto.getEstado() != null && !dto.getEstado().isBlank()) {
+			usuario.setEstado(dto.getEstado());
+		}
 
 		usuarioRepo.save(usuario);
 		return 0;
@@ -110,5 +125,4 @@ public class UsuarioService {
 		return 1;
 	}
 
-	
 }

@@ -70,8 +70,8 @@ public class FacturaService {
 		BigDecimal subtotal = BigDecimal.ZERO;
 		BigDecimal impuestos = BigDecimal.ZERO ;
 		for (DetalleFactura d : detalles) {
-			subtotal = d.getSubtotal();
-			impuestos = d.getValorImpuesto();
+			subtotal = subtotal.add(d.getSubtotal());
+			impuestos = impuestos.add(d.getValorImpuesto());
 		}
 
 		Factura factura = new Factura();

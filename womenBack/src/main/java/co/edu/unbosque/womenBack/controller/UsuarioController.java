@@ -62,7 +62,7 @@ public class UsuarioController {
 		return response;
 	}
 
-	@PutMapping("/update/{idUsuario}")
+	@PutMapping("/update")
 	public ResponseEntity<String> update( @RequestBody UsuarioDTO dto) {
 		
 		ResponseEntity<String> response;
@@ -91,9 +91,9 @@ public class UsuarioController {
 	}
 
 	@DeleteMapping("/delete/{idUsuario}")
-	public ResponseEntity<String> delete(@PathVariable int id) {
+	public ResponseEntity<String> delete(@PathVariable int idUsuario) {
 		ResponseEntity<String> response;
-		switch (usuarioServ.delete(id)) {
+		switch (usuarioServ.delete(idUsuario)) {
 		case 0: 
 			response = ResponseEntity.ok("Usuario eliminado correctamente");
 			break;
