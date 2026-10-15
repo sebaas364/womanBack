@@ -72,10 +72,10 @@ public class UsuarioService {
 			return 1;
 		}
 
-		if (usuarioRepo.existsByDocumentoAndIdUsuario(dto.getDocumento(), idUsuario)) {
+		if (usuarioRepo.existsByDocumentoAndIdUsuarioNot(dto.getDocumento(), idUsuario)) {
 			return 2;
 		}
-		if (usuarioRepo.existsByCorreoAndIdUsuario(dto.getCorreo(), idUsuario)) {
+		if (usuarioRepo.existsByCorreoAndIdUsuarioNot(dto.getCorreo(), idUsuario)) {
 			return 3;
 		}
 		Optional<Rol> rol = rolRepo.findById(dto.getIdRol());

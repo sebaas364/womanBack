@@ -25,7 +25,7 @@ public class UsuarioController {
 	@Autowired
 	private UsuarioService usuarioServ;
 
-	@GetMapping
+	@GetMapping("/getAll")
 	public ResponseEntity<List<UsuarioDTO>> getAll() {
 		return ResponseEntity.ok(usuarioServ.getAll());
 	}
@@ -37,7 +37,7 @@ public class UsuarioController {
 		return found.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
 	}
 
-	@PostMapping
+	@PostMapping("/create")
 	public ResponseEntity<String> create(@RequestBody UsuarioDTO dto) {
 		
 		ResponseEntity<String> response;
@@ -62,7 +62,7 @@ public class UsuarioController {
 		return response;
 	}
 
-	@PutMapping("/{id}")
+	@PutMapping("/update/{idUsuario}")
 	public ResponseEntity<String> update(@PathVariable int id, @RequestBody UsuarioDTO dto) {
 		
 		ResponseEntity<String> response;
@@ -90,7 +90,7 @@ public class UsuarioController {
 		return response;
 	}
 
-	@DeleteMapping("/{id}")
+	@DeleteMapping("/delete/{idUsuario}")
 	public ResponseEntity<String> delete(@PathVariable int id) {
 		ResponseEntity<String> response;
 		switch (usuarioServ.delete(id)) {

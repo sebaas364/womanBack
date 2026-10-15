@@ -9,14 +9,14 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface UsuarioRepository extends JpaRepository<Usuario, Integer> {
 
-	Optional<Usuario> findByDocumentp(String documento);
+	Optional<Usuario> findByDocumento(String documento);
 	Optional<Usuario> findByCorreo(String correo);
 	
     boolean existsByDocumento(String documento);
 
     boolean existsByCorreo(String correo);
 
-    boolean existsByDocumentoAndIdUsuario(String documento, Integer idUsuario);
+    boolean existsByDocumentoAndIdUsuarioNot(String documento, Integer idUsuario);
 
-    boolean existsByCorreoAndIdUsuario(String correo, Integer idUsuario);
+    boolean existsByCorreoAndIdUsuarioNot(String correo, Integer idUsuario);
 }
